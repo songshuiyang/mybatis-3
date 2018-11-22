@@ -43,20 +43,19 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.type.JdbcType;
 
 /**
- * @author Clinton Begin
- */
-/**
  * XML配置构建器，建造者模式,继承BaseBuilder
- *
+ * @author Clinton Begin
  */
 public class XMLConfigBuilder extends BaseBuilder {
 
-  //是否已解析，XPath解析器,环境
+  // 是否已解析，XPath解析器
   private boolean parsed;
+  // XPath解析器
   private XPathParser parser;
+  // 环境
   private String environment;
 
-  //以下3个一组
+  // 以下3个一组
   public XMLConfigBuilder(Reader reader) {
     this(reader, null, null);
   }
@@ -65,13 +64,13 @@ public class XMLConfigBuilder extends BaseBuilder {
     this(reader, environment, null);
   }
 
-  //构造函数，转换成XPathParser再去调用构造函数
+  // 构造函数，转换成XPathParser再去调用构造函数
   public XMLConfigBuilder(Reader reader, String environment, Properties props) {
     //构造一个需要验证，XMLMapperEntityResolver的XPathParser
     this(new XPathParser(reader, true, props, new XMLMapperEntityResolver()), environment, props);
   }
 
-  //以下3个一组
+  // 以下3个一组
   public XMLConfigBuilder(InputStream inputStream) {
     this(inputStream, null, null);
   }
@@ -84,22 +83,22 @@ public class XMLConfigBuilder extends BaseBuilder {
     this(new XPathParser(inputStream, true, props, new XMLMapperEntityResolver()), environment, props);
   }
 
-  //上面6个构造函数最后都合流到这个函数，传入XPathParser
+  // 上面6个构造函数最后都合流到这个函数，传入XPathParser
   private XMLConfigBuilder(XPathParser parser, String environment, Properties props) {
-    //首先调用父类初始化Configuration
+    // 首先调用父类初始化Configuration
     super(new Configuration());
-    //错误上下文设置成SQL Mapper Configuration(XML文件配置),以便后面出错了报错用吧
+    // 错误上下文设置成SQL Mapper Configuration(XML文件配置),以便后面出错了报错用吧
     ErrorContext.instance().resource("SQL Mapper Configuration");
-    //将Properties全部设置到Configuration里面去
+    // 将Properties全部设置到Configuration里面去
     this.configuration.setVariables(props);
     this.parsed = false;
     this.environment = environment;
     this.parser = parser;
   }
 
-  //解析配置
+  // 解析配置
   public Configuration parse() {
-    //如果已经解析过了，报错
+    // 如果已经解析过了，报错
     if (parsed) {
       throw new BuilderException("Each XMLConfigBuilder can only be used once.");
     }
@@ -124,34 +123,34 @@ public class XMLConfigBuilder extends BaseBuilder {
 //  </mappers> 
 //  </configuration>
     
-    //根节点是configuration
+    // 根节点是configuration
     parseConfiguration(parser.evalNode("/configuration"));
     return configuration;
   }
 
-  //解析配置
+  // 解析配置
   private void parseConfiguration(XNode root) {
     try {
-      //分步骤解析
+      // 分步骤解析
       //issue #117 read properties first
       //1.properties
       propertiesElement(root.evalNode("properties"));
-      //2.类型别名
+      // 2.类型别名
       typeAliasesElement(root.evalNode("typeAliases"));
-      //3.插件
+      // 3.插件
       pluginElement(root.evalNode("plugins"));
-      //4.对象工厂
+      // 4.对象工厂
       objectFactoryElement(root.evalNode("objectFactory"));
-      //5.对象包装工厂
+      // 5.对象包装工厂
       objectWrapperFactoryElement(root.evalNode("objectWrapperFactory"));
-      //6.设置
+      // 6.设置
       settingsElement(root.evalNode("settings"));
       // read it after objectFactory and objectWrapperFactory issue #631
-      //7.环境
+      // 7.环境
       environmentsElement(root.evalNode("environments"));
-      //8.databaseIdProvider
+      // 8.databaseIdProvider
       databaseIdProviderElement(root.evalNode("databaseIdProvider"));
-      //9.类型处理器
+      // 9.类型处理器
       typeHandlerElement(root.evalNode("typeHandlers"));
       //10.映射器
       mapperElement(root.evalNode("mappers"));
@@ -177,7 +176,7 @@ public class XMLConfigBuilder extends BaseBuilder {
     if (parent != null) {
       for (XNode child : parent.getChildren()) {
         if ("package".equals(child.getName())) {
-          //如果是package
+          // 如果是package
           String typeAliasPackage = child.getStringAttribute("name");
           //（一）调用TypeAliasRegistry.registerAliases，去包下找所有类,然后注册别名(有@Alias注解则用，没有则取类的simpleName)
           configuration.getTypeAliasRegistry().registerAliases(typeAliasPackage);

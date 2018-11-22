@@ -21,7 +21,8 @@
   <parent>
     <groupId>org.mybatis</groupId>
     <artifactId>mybatis-parent</artifactId>
-    <version>31-SNAPSHOT</version>
+    <version>28-SNAPSHOT</version>
+    <!--<version>31-SNAPSHOT</version>-->
     <relativePath>../parent/pom.xml</relativePath>
   </parent>
 

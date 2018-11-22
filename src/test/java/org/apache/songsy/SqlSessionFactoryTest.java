@@ -29,10 +29,14 @@ public class SqlSessionFactoryTest {
 
     @Test
     public void test1() throws Exception {
+        // 读取配置文件
         File file = new File("src/test/java/resources/mybatis-config.xml");
         InputStream inputStream = new FileInputStream(file);
+        // 构建SqlSessionFactory
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        // 得到SqlSession
         SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 得到Mapper
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         System.out.println(userMapper.selectByPrimaryKey(1));
     }

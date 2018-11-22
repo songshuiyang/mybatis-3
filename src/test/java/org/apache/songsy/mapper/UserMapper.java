@@ -8,4 +8,10 @@ import org.apache.songsy.entity.User;
  */
 public interface UserMapper {
     User selectByPrimaryKey(Integer id);
+
+    int insertSelective(User user);
+
+    int updateByPrimaryKeySelective (User user);
+
+
 }

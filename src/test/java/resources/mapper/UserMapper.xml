@@ -43,56 +43,7 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
-    <!--<select id="findPageList" parameterType="user" resultType="user">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM
-          sys_user
-        <where>
-            <if test="id != null and id != ''">
-                id = #{id}
-            </if>
-            <if test="username != null and username != ''">
-                AND username LIKE CONCAT('%','${username}','%')
-            </if>
-            <if test="password != null">
-                AND password = #{password}
-            </if>
-            <if test="nickname != null and nickname != ''">
-                AND nickname LIKE CONCAT('%','${nickname}','%')
-            </if>
-            <if test="sex != null">
-                AND sex = #{sex}
-            </if>
-            <if test="phone != null">
-                AND phone = #{phone}
-            </if>
-            <if test="email != null">
-                AND email = #{email}
-            </if>
-            <if test="address != null">
-                AND address = #{address}
-            </if>
-            <if test="salt != null">
-                AND salt = #{salt}
-            </if>
-            <if test="createdDate != null">
-                AND created_date = #{createdDate}
-            </if>
-            <if test="lastModifiedDate != null">
-                AND last_modified_date = #{lastModifiedDate}
-            </if>
-            <if test="remarks != null">
-                AND remarks = #{remarks}
-            </if>
-            <if test="enable != null">
-                AND enable = #{enable}
-            </if>
-        </where>
-
-    </select>
-
-    <insert id="insertSelective" parameterType="com.songsy.iframe.model.User">
+    <insert id="insertSelective" parameterType="org.apache.songsy.entity.User">
         insert into sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -184,7 +135,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.songsy.iframe.model.User">
+    <update id="updateByPrimaryKeySelective" parameterType="org.apache.songsy.entity.User">
         update sys_user
         <set>
             <if test="username != null">
@@ -230,44 +181,4 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from sys_user
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from sys_user
-    where id = #{id,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="com.songsy.iframe.model.User">
-        insert into sys_user (id, username, password,
-      nickname, sex, phone,
-      email, address, salt,
-      created_date, last_modified_date, remarks,
-      enable)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-      #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR},
-      #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR},
-      #{createdDate,jdbcType=TIMESTAMP}, #{lastModifiedDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR},
-      #{enable,jdbcType=BIT})
-    </insert>
-
-
-    <update id="updateByPrimaryKey" parameterType="com.songsy.iframe.model.User">
-        update sys_user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
-      phone = #{phone,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR},
-      created_date = #{createdDate,jdbcType=TIMESTAMP},
-      last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      enable = #{enable,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
-    </update>-->
 </mapper>
