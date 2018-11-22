@@ -46,8 +46,8 @@ public final class TypeHandlerRegistry {
   private final Map<Class<?>, TypeHandler<?>> ALL_TYPE_HANDLERS_MAP = new HashMap<Class<?>, TypeHandler<?>>();
 
   public TypeHandlerRegistry() {
-    //构造函数里注册系统内置的类型处理器
-	  //以下是为多个类型注册到同一个handler
+    // 构造函数里注册系统内置的类型处理器
+    // 以下是为多个类型注册到同一个handler
     register(Boolean.class, new BooleanTypeHandler());
     register(boolean.class, new BooleanTypeHandler());
     register(JdbcType.BOOLEAN, new BooleanTypeHandler());

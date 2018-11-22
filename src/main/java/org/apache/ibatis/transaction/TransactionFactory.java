@@ -24,32 +24,29 @@ import org.apache.ibatis.session.TransactionIsolationLevel;
 
 /**
  * Creates {@link Transaction} instances.
- *
- * @author Clinton Begin
- */
-/**
  * 事务工厂
- *
+ * @author Clinton Begin
  */
 public interface TransactionFactory {
 
   /**
+   * 设置属性
    * Sets transaction factory custom properties.
    * @param props
    */
-  //设置属性
   void setProperties(Properties props);
 
   /**
+   * 根据Connection创建Transaction
    * Creates a {@link Transaction} out of an existing connection.
    * @param conn Existing database connection
    * @return Transaction
    * @since 3.1.0
    */
-  //根据Connection创建Transaction
   Transaction newTransaction(Connection conn);
   
   /**
+   * 根据数据源和事务隔离级别创建Transaction
    * Creates a {@link Transaction} out of a datasource.
    * @param dataSource DataSource to take the connection from
    * @param level Desired isolation level
@@ -57,7 +54,6 @@ public interface TransactionFactory {
    * @return Transaction
    * @since 3.1.0
    */
-  //根据数据源和事务隔离级别创建Transaction
   Transaction newTransaction(DataSource dataSource, TransactionIsolationLevel level, boolean autoCommit);
 
 }

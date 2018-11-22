@@ -180,7 +180,7 @@ public class Configuration {
   }
 
   public Configuration() {
-    //注册更多的类型别名，至于为何不直接在TypeAliasRegistry里注册，还需进一步研究
+    // 注册更多的类型别名，至于为何不直接在TypeAliasRegistry里注册，还需进一步研究
     typeAliasRegistry.registerAlias("JDBC", JdbcTransactionFactory.class);
     typeAliasRegistry.registerAlias("MANAGED", ManagedTransactionFactory.class);
 
