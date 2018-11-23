@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.Transaction;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.managed.ManagedTransactionFactory;
+import org.apache.songsy.entity.User;
 import org.apache.songsy.mapper.UserMapper;
 import org.hsqldb.Session;
 import org.junit.Test;
@@ -27,8 +28,9 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class SqlSessionFactoryTest {
 
+
     @Test
-    public void test1() throws Exception {
+    public void core() throws Exception {
         // 读取配置文件
         File file = new File("src/test/java/resources/mybatis-config.xml");
         InputStream inputStream = new FileInputStream(file);
@@ -40,4 +42,40 @@ public class SqlSessionFactoryTest {
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         System.out.println(userMapper.selectByPrimaryKey(1));
     }
+
+
+    @Test
+    public void methodCacheTest() throws Exception {
+        // 读取配置文件
+        File file = new File("src/test/java/resources/mybatis-config.xml");
+        InputStream inputStream = new FileInputStream(file);
+        // 构建SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        // 得到SqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 得到Mapper
+        UserMapper userMapper1 = sqlSession.getMapper(UserMapper.class);
+        // 测试methodCache
+        UserMapper userMapper2 = sqlSession.getMapper(UserMapper.class);
+        System.out.println(userMapper1.selectByPrimaryKey(1));
+    }
+
+    @Test
+    public void updateUserTest() throws Exception {
+        // 读取配置文件
+        File file = new File("src/test/java/resources/mybatis-config.xml");
+        InputStream inputStream = new FileInputStream(file);
+        // 构建SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        // 得到SqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 得到Mapper
+        UserMapper userMapper1 = sqlSession.getMapper(UserMapper.class);
+        User user = new User();
+        user.setId(1);
+        user.setNickname("songsy");
+        System.out.println(userMapper1.updateByPrimaryKeySelective(user));
+    }
+
+
 }

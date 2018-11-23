@@ -23,19 +23,16 @@ import java.util.Map;
 import org.apache.ibatis.executor.BatchResult;
 
 /**
+ * 这是MyBatis主要的一个类，用来执行SQL，获取映射器，管理事务
  * The primary Java interface for working with MyBatis.
  * Through this interface you can execute commands, get mappers and manage transactions.
  *
  * @author Clinton Begin
  */
-/**
- * 这是MyBatis主要的一个类，用来执行SQL，获取映射器，管理事务
- *
- */
 public interface SqlSession extends Closeable {
 
-  //语句执行方法
-  //这些方法被用来执行SELECT，INSERT，UPDATE和DELETE语句。
+  // 语句执行方法
+  // 这些方法被用来执行SELECT，INSERT，UPDATE和DELETE语句。
   /**
    * Retrieve a single row mapped from the statement key
    * 获取一条记录
