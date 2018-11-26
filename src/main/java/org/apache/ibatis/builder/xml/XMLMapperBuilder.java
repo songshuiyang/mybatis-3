@@ -155,17 +155,17 @@ public class XMLMapperBuilder extends BaseBuilder {
     buildStatementFromContext(list, null);
   }
 
-  //7.1构建语句
+  // 7.1构建语句
   private void buildStatementFromContext(List<XNode> list, String requiredDatabaseId) {
     for (XNode context : list) {
-      //构建所有语句,一个mapper下可以有很多select
-      //语句比较复杂，核心都在这里面，所以调用XMLStatementBuilder
+      // 构建所有语句,一个mapper下可以有很多select
+      // 语句比较复杂，核心都在这里面，所以调用XMLStatementBuilder
       final XMLStatementBuilder statementParser = new XMLStatementBuilder(configuration, builderAssistant, context, requiredDatabaseId);
       try {
-          //核心XMLStatementBuilder.parseStatementNode
+        // 核心XMLStatementBuilder.parseStatementNode
         statementParser.parseStatementNode();
       } catch (IncompleteElementException e) {
-          //如果出现SQL语句不完整，把它记下来，塞到configuration去
+        // 如果出现SQL语句不完整，把它记下来，塞到configuration去
         configuration.addIncompleteStatement(statementParser);
       }
     }
@@ -286,12 +286,12 @@ public class XMLMapperBuilder extends BaseBuilder {
     }
   }
 
-  //5.配置resultMap,高级功能
+  //5.配置resultMap
   private void resultMapElements(List<XNode> list) throws Exception {
-      //基本上就是循环把resultMap加入到Configuration里去,保持2份，一份缩略，一分全名
+    // 基本上就是循环把resultMap加入到Configuration里去,保持2份，一份缩略，一分全名
     for (XNode resultMapNode : list) {
       try {
-          //循环调resultMapElement
+        // 循环遍历resultMap节点
         resultMapElement(resultMapNode);
       } catch (IncompleteElementException e) {
         // ignore, it will be retried
@@ -306,7 +306,7 @@ public class XMLMapperBuilder extends BaseBuilder {
 
   //5.1 配置resultMap
   private ResultMap resultMapElement(XNode resultMapNode, List<ResultMapping> additionalResultMappings) throws Exception {
-    //错误上下文
+//错误上下文
 //取得标示符   ("resultMap[userResultMap]")
 //    <resultMap id="userResultMap" type="User">
 //      <id property="id" column="user_id" />
@@ -332,6 +332,7 @@ public class XMLMapperBuilder extends BaseBuilder {
     Discriminator discriminator = null;
     List<ResultMapping> resultMappings = new ArrayList<ResultMapping>();
     resultMappings.addAll(additionalResultMappings);
+    //遍历resultMap 的子节点
     List<XNode> resultChildren = resultMapNode.getChildren();
     for (XNode resultChild : resultChildren) {
       if ("constructor".equals(resultChild.getName())) {

@@ -179,6 +179,7 @@ public class ResultMapping {
       if (resultMapping.typeHandler == null && resultMapping.javaType != null) {
         Configuration configuration = resultMapping.configuration;
         TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
+        // 根据该字段的实体类类型及jdbc类型获取默认的类型处理器
         resultMapping.typeHandler = typeHandlerRegistry.getTypeHandler(resultMapping.javaType, resultMapping.jdbcType);
       }
     }
