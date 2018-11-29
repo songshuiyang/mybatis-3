@@ -64,6 +64,7 @@ public class XMLScriptBuilder extends BaseBuilder {
   }
 
   List<SqlNode> parseDynamicTags(XNode node) {
+    // 一行一个SqlNode
     List<SqlNode> contents = new ArrayList<SqlNode>();
     NodeList children = node.getNode().getChildNodes();
     for (int i = 0; i < children.getLength(); i++) {
@@ -77,12 +78,14 @@ public class XMLScriptBuilder extends BaseBuilder {
         } else {
           contents.add(new StaticTextSqlNode(data));
         }
-      } else if (child.getNode().getNodeType() == Node.ELEMENT_NODE) { // issue #628
+      } else if (child.getNode().getNodeType() == Node.ELEMENT_NODE) { // issue #628 如果是xml标签
         String nodeName = child.getNode().getNodeName();
+        // 得到动态sql标签处理类 trim|where|set...
         NodeHandler handler = nodeHandlers(nodeName);
         if (handler == null) {
           throw new BuilderException("Unknown element <" + nodeName + "> in SQL statement.");
         }
+        // 解析动态结点
         handler.handleNode(child, contents);
         isDynamic = true;
       }
