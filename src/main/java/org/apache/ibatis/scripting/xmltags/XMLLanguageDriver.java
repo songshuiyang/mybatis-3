@@ -49,7 +49,7 @@ public class XMLLanguageDriver implements LanguageDriver {
     return builder.parseScriptNode();
   }
 
-  //注解方式构建mapper，一般不用，可以暂时忽略
+  //注解方式构建mapper
   @Override
   public SqlSource createSqlSource(Configuration configuration, String script, Class<?> parameterType) {
     // issue #3
@@ -68,5 +68,4 @@ public class XMLLanguageDriver implements LanguageDriver {
       }
     }
   }
-
 }

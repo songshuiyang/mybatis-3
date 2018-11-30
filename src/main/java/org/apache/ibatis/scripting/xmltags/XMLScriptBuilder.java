@@ -69,6 +69,7 @@ public class XMLScriptBuilder extends BaseBuilder {
     NodeList children = node.getNode().getChildNodes();
     for (int i = 0; i < children.getLength(); i++) {
       XNode child = node.newXNode(children.item(i));
+      // 如果节点类型CDATA或者是文本，构造一个TextSqlNode或StaticTextSqlNode
       if (child.getNode().getNodeType() == Node.CDATA_SECTION_NODE || child.getNode().getNodeType() == Node.TEXT_NODE) {
         String data = child.getStringBody("");
         TextSqlNode textSqlNode = new TextSqlNode(data);
@@ -78,7 +79,7 @@ public class XMLScriptBuilder extends BaseBuilder {
         } else {
           contents.add(new StaticTextSqlNode(data));
         }
-      } else if (child.getNode().getNodeType() == Node.ELEMENT_NODE) { // issue #628 如果是xml标签
+      } else if (child.getNode().getNodeType() == Node.ELEMENT_NODE) { // 如果是xml标签 trim|where|set...
         String nodeName = child.getNode().getNodeName();
         // 得到动态sql标签处理类 trim|where|set...
         NodeHandler handler = nodeHandlers(nodeName);
