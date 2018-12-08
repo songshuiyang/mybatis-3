@@ -23,26 +23,27 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.session.Configuration;
 
 /**
+ * 绑定的SQL,是从SqlSource而来，将动态内容都处理完成得到的SQL语句字符串，其中包括?,还有绑定的参数
+ *
  * An actual SQL String got form an {@link SqlSource} after having processed any dynamic content.
- * The SQL may have SQL placeholders "?" and an list (ordered) of an parameter mappings 
- * with the additional information for each parameter (at least the property name of the input object to read 
- * the value from). 
+ * The SQL may have SQL placeholders "?" and an list (ordered) of an parameter mappings
+ * with the additional information for each parameter (at least the property name of the input object to read
+ * the value from).
  * </br>
  * Can also have additional parameters that are created by the dynamic language (for loops, bind...).
- */
-/**
  * @author Clinton Begin
- */
-/**
- * 绑定的SQL,是从SqlSource而来，将动态内容都处理完成得到的SQL语句字符串，其中包括?,还有绑定的参数
- * 
  */
 public class BoundSql {
 
+  // 处理完成得到的SQL语句字符串，其中包括?,还有绑定的参数
   private String sql;
+  // 参数映射对象
   private List<ParameterMapping> parameterMappings;
+  // 外面传入的sql参数
   private Object parameterObject;
+  // 额外参数？
   private Map<String, Object> additionalParameters;
+  // 参数元数据
   private MetaObject metaParameters;
 
   public BoundSql(Configuration configuration, String sql, List<ParameterMapping> parameterMappings, Object parameterObject) {

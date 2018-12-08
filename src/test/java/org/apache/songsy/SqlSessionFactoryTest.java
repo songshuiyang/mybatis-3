@@ -94,5 +94,22 @@ public class SqlSessionFactoryTest {
         System.out.println(userMapper1.updateByPrimaryKeySelective(user));
     }
 
+    @Test
+    public void selectSelectiveUserTest() throws Exception {
+        // 读取配置文件
+        File file = new File("src/test/java/resources/mybatis-config.xml");
+        InputStream inputStream = new FileInputStream(file);
+        // 构建SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        // 得到SqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 得到Mapper
+        UserMapper userMapper1 = sqlSession.getMapper(UserMapper.class);
+        User user = new User();
+        user.setId(1);
+        user.setUsername("admin");
+        System.out.println(userMapper1.selectSelective(user));
+    }
+
 
 }

@@ -61,30 +61,30 @@ public class DefaultParameterHandler implements ParameterHandler {
     return parameterObject;
   }
 
-  //设置参数
+  // 设置参数
   @Override
   public void setParameters(PreparedStatement ps) throws SQLException {
     ErrorContext.instance().activity("setting parameters").object(mappedStatement.getParameterMap().getId());
     List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
     if (parameterMappings != null) {
-      //循环设参数
+      // 循环设参数
       for (int i = 0; i < parameterMappings.size(); i++) {
         ParameterMapping parameterMapping = parameterMappings.get(i);
         if (parameterMapping.getMode() != ParameterMode.OUT) {
-          //如果不是OUT，才设进去
+          // 如果不是OUT，才设进去
           Object value;
           String propertyName = parameterMapping.getProperty();
           if (boundSql.hasAdditionalParameter(propertyName)) { // issue #448 ask first for additional params
-            //若有额外的参数, 设为额外的参数
+            // 若有额外的参数, 设为额外的参数
             value = boundSql.getAdditionalParameter(propertyName);
           } else if (parameterObject == null) {
-            //若参数为null，直接设null
+            // 若参数为null，直接设null
             value = null;
           } else if (typeHandlerRegistry.hasTypeHandler(parameterObject.getClass())) {
-            //若参数有相应的TypeHandler，直接设object
+            // 若参数有相应的TypeHandler，直接设object
             value = parameterObject;
           } else {
-            //除此以外，MetaObject.getValue反射取得值设进去
+            // 除此以外，MetaObject.getValue反射取得值设进去
             MetaObject metaObject = configuration.newMetaObject(parameterObject);
             value = metaObject.getValue(propertyName);
           }

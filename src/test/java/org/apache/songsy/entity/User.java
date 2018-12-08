@@ -11,20 +11,6 @@ public class User {
 
     private Integer id;
 
-    private String createdBy;
-
-    private Date createdDate;
-
-    private String lastModifiedBy;
-
-    private Date lastModifiedDate;
-
-    private String remarks;
-
-    private Integer status;
-
-    private Boolean enable;
-
     private String username;
 
     private String password;
@@ -44,6 +30,20 @@ public class User {
     private String salt;
 
     private String headPortrait;
+
+    private String createdBy;
+
+    private Date createdDate;
+
+    private String lastModifiedBy;
+
+    private Date lastModifiedDate;
+
+    private String remarks;
+
+    private Integer status;
+
+    private Boolean enable;
 
     public Integer getId() {
         return id;

@@ -25,7 +25,7 @@ import java.util.List;
  * 
  */
 public class MixedSqlNode implements SqlNode {
-  //组合模式，拥有一个SqlNode的List
+  // 组合模式，拥有一个SqlNode的List
   private List<SqlNode> contents;
 
   public MixedSqlNode(List<SqlNode> contents) {
@@ -34,7 +34,7 @@ public class MixedSqlNode implements SqlNode {
 
   @Override
   public boolean apply(DynamicContext context) {
-    //依次调用list里每个元素的apply
+    // 依次调用list里每个元素的apply
     for (SqlNode sqlNode : contents) {
       sqlNode.apply(context);
     }

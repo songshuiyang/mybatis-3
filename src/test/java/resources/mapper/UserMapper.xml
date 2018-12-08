@@ -36,6 +36,24 @@
         enable
     </sql>
 
+    <select id="selectSelective" resultType="org.apache.songsy.entity.User" parameterType="org.apache.songsy.entity.User">
+        SELECT
+          *
+        FROM
+          sys_user
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="username != null and username != ''">
+                AND username = #{username}
+            </if>
+            <if test="password != null">
+                AND password = #{password}
+            </if>
+        </where>
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>

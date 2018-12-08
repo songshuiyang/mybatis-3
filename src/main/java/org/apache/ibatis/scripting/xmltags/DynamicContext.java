@@ -48,7 +48,6 @@ public class DynamicContext {
     //会按照ContextAccessor中描述的Map接口的方式来访问和读取ContextMap对象，获取计算过程中需要的参数。
     //ContextMap对象内部可能封装了一个普通的POJO对象，也可以是直接传递的Map对象，当然从外部是看不出来的，因为都是使用Map的接口来读取数据。
   }
-
   private final ContextMap bindings;
   private final StringBuilder sqlBuilder = new StringBuilder();
   private int uniqueNumber = 0;

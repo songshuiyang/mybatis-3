@@ -302,7 +302,6 @@ public final class MappedStatement {
         }
       }
     }
-
     return boundSql;
   }
 
