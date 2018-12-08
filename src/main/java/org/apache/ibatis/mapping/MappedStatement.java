@@ -36,15 +36,16 @@ import org.apache.ibatis.session.Configuration;
  *
  */
 public final class MappedStatement {
-
+  // xml文件位置
   private String resource;
   private Configuration configuration;
+  // 节点中的id属性加要命名空间比如 org.apache.songsy.mapper.RoleMapper.selectByPrimaryKey
   private String id;
   private Integer fetchSize;
   private Integer timeout;
   private StatementType statementType;
   private ResultSetType resultSetType;
-  //SQL源码
+  // SQL源码，实现动态sql
   private SqlSource sqlSource;
   private Cache cache;
   private ParameterMap parameterMap;

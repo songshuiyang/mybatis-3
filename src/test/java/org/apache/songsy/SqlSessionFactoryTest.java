@@ -43,6 +43,23 @@ public class SqlSessionFactoryTest {
         System.out.println(userMapper.selectByPrimaryKey(1));
     }
 
+    @Test
+    public void level1CacheTest() throws Exception {
+        // 读取配置文件
+        File file = new File("src/test/java/resources/mybatis-config.xml");
+        InputStream inputStream = new FileInputStream(file);
+        // 构建SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        // 得到SqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 得到Mapper
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        System.out.println("第一次查询: "+userMapper.selectByPrimaryKey(1));
+        System.out.println("第二次查询: "+userMapper.selectByPrimaryKey(1));
+    }
+
+
+
 
     @Test
     public void methodCacheTest() throws Exception {

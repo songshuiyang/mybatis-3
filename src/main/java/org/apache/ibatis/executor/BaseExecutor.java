@@ -114,7 +114,7 @@ public abstract class BaseExecutor implements Executor {
     return closed;
   }
 
-  //SqlSession.update/insert/delete会调用此方法
+  // SqlSession.update/insert/delete会调用此方法
   @Override
   public int update(MappedStatement ms, Object parameter) throws SQLException {
     ErrorContext.instance().resource(ms.getResource()).activity("executing an update").object(ms.getId());
@@ -219,7 +219,7 @@ public abstract class BaseExecutor implements Executor {
       throw new ExecutorException("Executor was closed.");
     }
     CacheKey cacheKey = new CacheKey();
-    //MyBatis 对于其 Key 的生成采取规则为：[mappedStementId + offset + limit + SQL + queryParams + environment]生成一个哈希码
+    // MyBatis 对于其 Key 的生成采取规则为：[mappedStementId + offset + limit + SQL + queryParams + environment]生成一个哈希码
     cacheKey.update(ms.getId());
     cacheKey.update(Integer.valueOf(rowBounds.getOffset()));
     cacheKey.update(Integer.valueOf(rowBounds.getLimit()));
@@ -227,7 +227,7 @@ public abstract class BaseExecutor implements Executor {
     List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
     TypeHandlerRegistry typeHandlerRegistry = ms.getConfiguration().getTypeHandlerRegistry();
     // mimic DefaultParameterHandler logic
-    //模仿DefaultParameterHandler的逻辑,不再重复，请参考DefaultParameterHandler
+    // 模仿DefaultParameterHandler的逻辑,不再重复，请参考DefaultParameterHandler
     for (int i = 0; i < parameterMappings.size(); i++) {
       ParameterMapping parameterMapping = parameterMappings.get(i);
       if (parameterMapping.getMode() != ParameterMode.OUT) {

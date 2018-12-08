@@ -23,19 +23,16 @@ import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.cache.CacheException;
 
 /**
- * @author Clinton Begin
- */
-/**
  * 永久缓存
  * 一旦存入就一直保持
- *
+ * @author Clinton Begin
  */
 public class PerpetualCache implements Cache {
 
-    //每个永久缓存有一个ID来识别
+  // 每个永久缓存有一个ID来识别
   private String id;
 
-  //内部就是一个HashMap,所有方法基本就是直接调用HashMap的方法,不支持多线程？
+  // 内部就是一个HashMap,所有方法基本就是直接调用HashMap的方法
   private Map<Object, Object> cache = new HashMap<Object, Object>();
 
   public PerpetualCache(String id) {

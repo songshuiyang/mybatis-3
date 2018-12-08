@@ -346,11 +346,11 @@ public class XMLMapperBuilder extends BaseBuilder {
         if ("id".equals(resultChild.getName())) {
           flags.add(ResultFlag.ID);
         }
-        //调5.1.1 buildResultMappingFromContext,得到ResultMapping
+        // 调5.1.1 buildResultMappingFromContext,得到ResultMapping
         resultMappings.add(buildResultMappingFromContext(resultChild, typeClass, flags));
       }
     }
-    //最后再调ResultMapResolver得到ResultMap
+    // 最后再调ResultMapResolver得到ResultMap
     ResultMapResolver resultMapResolver = new ResultMapResolver(builderAssistant, id, typeClass, extend, discriminator, resultMappings, autoMapping);
     try {
       return resultMapResolver.resolve();
@@ -453,7 +453,7 @@ public class XMLMapperBuilder extends BaseBuilder {
     String javaType = context.getStringAttribute("javaType");
     String jdbcType = context.getStringAttribute("jdbcType");
     String nestedSelect = context.getStringAttribute("select");
-    //处理嵌套的result map
+    // 处理嵌套的result map
     String nestedResultMap = context.getStringAttribute("resultMap",
         processNestedResultMappings(context, Collections.<ResultMapping> emptyList()));
     String notNullColumn = context.getStringAttribute("notNullColumn");
@@ -466,7 +466,7 @@ public class XMLMapperBuilder extends BaseBuilder {
     @SuppressWarnings("unchecked")
     Class<? extends TypeHandler<?>> typeHandlerClass = (Class<? extends TypeHandler<?>>) resolveClass(typeHandler);
     JdbcType jdbcTypeEnum = resolveJdbcType(jdbcType);
-    //又去调builderAssistant.buildResultMapping
+    // 又去调builderAssistant.buildResultMapping
     return builderAssistant.buildResultMapping(resultType, property, column, javaTypeClass, jdbcTypeEnum, nestedSelect, nestedResultMap, notNullColumn, columnPrefix, typeHandlerClass, flags, resulSet, foreignColumn, lazy);
   }
   
