@@ -490,11 +490,11 @@ public class Configuration {
     return resultSetHandler;
   }
 
-  //创建语句处理器
+  // 创建语句处理器
   public StatementHandler newStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
-    //创建路由选择语句处理器
+    // 创建路由选择语句处理器
     StatementHandler statementHandler = new RoutingStatementHandler(executor, mappedStatement, parameterObject, rowBounds, resultHandler, boundSql);
-    //插件在这里插入
+    // 插件在这里插入
     statementHandler = (StatementHandler) interceptorChain.pluginAll(statementHandler);
     return statementHandler;
   }

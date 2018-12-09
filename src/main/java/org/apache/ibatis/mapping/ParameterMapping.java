@@ -35,9 +35,9 @@ public class ParameterMapping {
 
   //例子：#{property,javaType=int,jdbcType=NUMERIC}
   
-  //property
+  // property
   private String property;
-  //mode
+  // mode
   private ParameterMode mode;
   //javaType=int
   private Class<?> javaType = Object.class;

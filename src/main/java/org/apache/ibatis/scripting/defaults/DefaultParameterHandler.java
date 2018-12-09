@@ -44,8 +44,11 @@ public class DefaultParameterHandler implements ParameterHandler {
   private final TypeHandlerRegistry typeHandlerRegistry;
 
   private final MappedStatement mappedStatement;
+  // 参数对象
   private final Object parameterObject;
+  // BoundSql
   private BoundSql boundSql;
+  // 万能Configuration
   private Configuration configuration;
 
   public DefaultParameterHandler(MappedStatement mappedStatement, Object parameterObject, BoundSql boundSql) {
@@ -88,12 +91,14 @@ public class DefaultParameterHandler implements ParameterHandler {
             MetaObject metaObject = configuration.newMetaObject(parameterObject);
             value = metaObject.getValue(propertyName);
           }
+          // 类型处理器
           TypeHandler typeHandler = parameterMapping.getTypeHandler();
           JdbcType jdbcType = parameterMapping.getJdbcType();
           if (value == null && jdbcType == null) {
-            //不同类型的set方法不同，所以委派给子类的setParameter方法
+            // 不同类型的set方法不同，所以委派给子类的setParameter方法
             jdbcType = configuration.getJdbcTypeForNull();
           }
+          // 用在类型处理器进行赋值
           typeHandler.setParameter(ps, i + 1, value, jdbcType);
         }
       }

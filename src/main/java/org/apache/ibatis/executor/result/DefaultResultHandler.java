@@ -31,7 +31,7 @@ import org.apache.ibatis.session.ResultHandler;
  */
 public class DefaultResultHandler implements ResultHandler {
 
-  //内部实现是存了一个List
+  // 内部实现是存了一个List
   private final List<Object> list;
 
   public DefaultResultHandler() {
