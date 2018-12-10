@@ -72,9 +72,26 @@ public class SqlSessionFactoryTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         // 得到Mapper
         UserMapper userMapper1 = sqlSession.getMapper(UserMapper.class);
-        // 测试methodCache
+        // 测试一级缓存
         UserMapper userMapper2 = sqlSession.getMapper(UserMapper.class);
         System.out.println(userMapper1.selectByPrimaryKey(1));
+    }
+
+    @Test
+    public void methodLevel2CacheTest() throws Exception {
+        // 读取配置文件
+        File file = new File("src/test/java/resources/mybatis-config.xml");
+        InputStream inputStream = new FileInputStream(file);
+        // 构建SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        // 得到SqlSession
+        SqlSession sqlSession1 = sqlSessionFactory.openSession();
+        SqlSession sqlSession2 = sqlSessionFactory.openSession();
+        UserMapper userMapper1 = sqlSession1.getMapper(UserMapper.class);
+        UserMapper userMapper2 = sqlSession2.getMapper(UserMapper.class);
+        // 测试二级缓存
+        System.out.println(userMapper1.selectByPrimaryKey(1));
+        System.out.println(userMapper2.selectByPrimaryKey(1));
     }
 
     @Test

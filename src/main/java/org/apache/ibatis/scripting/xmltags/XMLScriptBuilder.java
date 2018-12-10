@@ -52,6 +52,7 @@ public class XMLScriptBuilder extends BaseBuilder {
   }
 
   public SqlSource parseScriptNode() {
+    // 获取SqlNode List
     List<SqlNode> contents = parseDynamicTags(context);
     MixedSqlNode rootSqlNode = new MixedSqlNode(contents);
     SqlSource sqlSource = null;
@@ -64,7 +65,7 @@ public class XMLScriptBuilder extends BaseBuilder {
   }
 
   List<SqlNode> parseDynamicTags(XNode node) {
-    // 一行一个SqlNode
+    // 一行一个SqlNode，动态节点一个SqlNode
     List<SqlNode> contents = new ArrayList<SqlNode>();
     NodeList children = node.getNode().getChildNodes();
     for (int i = 0; i < children.getLength(); i++) {
