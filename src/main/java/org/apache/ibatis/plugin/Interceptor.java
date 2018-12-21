@@ -18,21 +18,18 @@ package org.apache.ibatis.plugin;
 import java.util.Properties;
 
 /**
- * @author Clinton Begin
- */
-/**
  * 拦截器
- *
+ * @author Clinton Begin
  */
 public interface Interceptor {
 
-  //拦截
+  // 在这里完成拦截操作
   Object intercept(Invocation invocation) throws Throwable;
 
-  //插入
+  // 用于封装目标对象，我们可以决定是否要进行拦截进而决定要返回一个什么样的目标对象
   Object plugin(Object target);
 
-  //设置属性
+  // 用于在Mybatis配置文件中指定一些属性的。
   void setProperties(Properties properties);
 
 }

@@ -21,15 +21,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 就是定义哪些类，方法，参数需要被拦截
  * @author Clinton Begin
- */
-/**
- * 签名
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Signature {
-  //就是定义哪些类，方法，参数需要被拦截
+
   Class<?> type();
 
   String method();
