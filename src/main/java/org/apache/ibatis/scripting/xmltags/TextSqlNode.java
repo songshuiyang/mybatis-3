@@ -61,7 +61,7 @@ public class TextSqlNode implements SqlNode {
     return new GenericTokenParser("${", "}", handler);
   }
 
-  //绑定记号解析器
+  // 绑定记号解析器
   private static class BindingTokenParser implements TokenHandler {
 
     private DynamicContext context;
@@ -80,7 +80,7 @@ public class TextSqlNode implements SqlNode {
       } else if (SimpleTypeRegistry.isSimpleType(parameter.getClass())) {
         context.getBindings().put("value", parameter);
       }
-      //从缓存里取得值
+      // 从缓存里取得值
       Object value = OgnlCache.getValue(content, context.getBindings());
       String srtValue = (value == null ? "" : String.valueOf(value)); // issue #274 return "" instead of "null"
       checkInjection(srtValue);

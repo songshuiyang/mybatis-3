@@ -152,5 +152,26 @@ public class SqlSessionFactoryTest {
         System.out.println(userMapper1.selectSelective(user));
     }
 
+    /**
+     * 测试 $ 和 #
+     * @throws Exception
+     */
+    @Test
+    public void selectByUsernameAndPasswordTest() throws Exception {
+        // 读取配置文件
+        File file = new File("src/test/java/resources/mybatis-config.xml");
+        InputStream inputStream = new FileInputStream(file);
+        // 构建SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        // 得到SqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 得到Mapper
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User();
+        user.setUsername("songsy");
+        user.setPassword("root");
+        System.out.println(mapper.selectByUsernameAndPassword(user));
+    }
+
 
 }

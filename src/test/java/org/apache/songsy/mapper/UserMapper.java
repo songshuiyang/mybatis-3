@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * 用户
+ *
  * @author songshuiyang
  */
 public interface UserMapper {
@@ -15,7 +16,7 @@ public interface UserMapper {
 
     int insertSelective(User user);
 
-    int updateByPrimaryKeySelective (User user);
+    int updateByPrimaryKeySelective(User user);
 
-
+    List<User> selectByUsernameAndPassword(User user);
 }

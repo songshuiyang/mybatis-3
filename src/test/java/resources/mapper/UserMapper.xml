@@ -55,6 +55,16 @@
         </where>
     </select>
 
+    <select id="selectByUsernameAndPassword" resultType="org.apache.songsy.entity.User" parameterType="org.apache.songsy.entity.User">
+        SELECT
+          *
+        FROM
+          sys_user
+        WHERE
+          username = ${username}
+        AND password = #{password}
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
