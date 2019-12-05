@@ -93,15 +93,15 @@ public class XMLMapperBuilder extends BaseBuilder {
     this.resource = resource;
   }
 
-  //解析
+  // 解析
   public void parse() {
-    //如果没有加载过再加载，防止重复加载
+    // 如果没有加载过再加载，防止重复加载
     if (!configuration.isResourceLoaded(resource)) {
-      //配置mapper
+      // 配置mapper
       configurationElement(parser.evalNode("/mapper"));
-      //标记一下，已经加载过了
+      // 标记一下，已经加载过了
       configuration.addLoadedResource(resource);
-      //绑定映射器到namespace
+      // 绑定映射器到namespace
       bindMapperForNamespace();
     }
 

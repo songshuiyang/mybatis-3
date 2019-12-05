@@ -68,7 +68,7 @@ public class SimpleExecutor extends BaseExecutor {
     try {
       Configuration configuration = ms.getConfiguration();
       //新建一个StatementHandler
-      //这里看到ResultHandler传入了
+      //这里看到ResultHandler传入了 拦截器在这里完成工作
       StatementHandler handler = configuration.newStatementHandler(wrapper, ms, parameter, rowBounds, resultHandler, boundSql);
       //准备语句
       stmt = prepareStatement(handler, ms.getStatementLog());
